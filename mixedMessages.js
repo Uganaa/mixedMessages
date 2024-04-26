@@ -1,6 +1,34 @@
-const randomMessageGenerator = (messages) => {
-    const randomMessageId = Math.floor(Math.random() * messages.length);
+const randomMessageGenerator = (num) => {
+    const randomMessageId = Math.floor(Math.random() * num);
     return randomMessageId
+}
+
+let dadJoke = [];
+let personalWisdom = [];
+
+const collectiveWisdom = {
+    signInfo: ['star', 'moon', 'sun', 'comet'],
+    fortuneOutput: ['terrible luck', 'bad luck', 'ok luck', 'good luck', 'great luck'],
+    advice: ['go out and eat', 'not read this', 'play more', 'trust no one']
+  }
+
+for(let prop in collectiveWisdom) {
+    let optionIdx = randomMessageGenerator(collectiveWisdom[prop].length)
+  
+    // use the object's properties to customize the message being added to personalWisdom  
+    switch(prop) {
+      case 'signInfo':
+        personalWisdom.push(`Your sign right now is a "${collectiveWisdom[prop][optionIdx]}".`)
+        break
+      case 'fortuneOutput':
+        personalWisdom.push(`You are having: "${collectiveWisdom[prop][optionIdx]}".`)
+        break
+      case 'advice':
+        personalWisdom.push(`You should: "${collectiveWisdom[prop][optionIdx]}".`)
+        break
+      default:
+        personalWisdom.push('There is not enough info.')
+    }
 }
 
 const dadJokes = ["April showers bring May flowers, but what do May flowers bring? Pilgrims", 
@@ -35,8 +63,12 @@ const dadJokes = ["April showers bring May flowers, but what do May flowers brin
             "How do you make a water bed bouncier? Fill it with Poland Spring water"];
 
 const mixedMessages = () => {
-    const randomId = randomMessageGenerator(dadJokes);
-    console.log(dadJokes[randomId]);
+    const randomId = randomMessageGenerator(dadJokes.length);
+    dadJoke = dadJokes[randomId];
+    console.log(`Dad Joke of the day: ${dadJoke}`);
+    const formatted = personalWisdom.join('\n');
+    console.log(formatted);
 }
+
 
 mixedMessages();
